@@ -40,8 +40,8 @@ end
 2. hamming_distance
   2a. initialize dna2 to the string passed in as an argument
   2b. initialize 'hamming_distance_val' to 0
-  2b. Initialize 'shorter_dna' to the result of placing @dna1 and dna2 in an array and sorting the array, 
-  then selecting the element at index 0 of that array
+  2b. Initialize 'shorter_dna' to the result of placing @dna1 and dna2 in an array and sorting the array by string
+  size, then selecting the element at index 0 of that array
   2c. Create a range from 0 up to the length of `shorter_dna` - 1 and iterate over it, accessing each iterated 
   value via 'idx'
     - Increment `hamming_distance_val` by 1 if the characters at index `idx` of `@dna1` and `dna2` are unequal
@@ -52,9 +52,13 @@ end
 =end
 
 class DNA
-  def initialize
+  def initialize(str)
+    @dna1 = str
   end
 
-  def hamming_distance
+  def hamming_distance(dna2)
+    shorter_dna = [@dna1, dna2].sort_by(&:size)[0]
+    (0...shorter_dna.size).count { |idx| @dna1[idx] != dna2[idx] }
   end
 end
+
